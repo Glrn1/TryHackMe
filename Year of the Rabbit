@@ -1,0 +1,45 @@
+Ao entrar no site olhamos o codigo fonte e vemos "assets/style.css"
+
+Ao entrar encontramos "Nice to see someone checking the stylesheets. Take a look at the page: /sup3r_s3cr3t_fl4g.php"
+
+Ao ouvir o video em 56 segundos fala algo sobre burp
+
+Ao acessar a pagina com o burp descobrimos um novo diretorio: WExYY2Cv-qU
+
+Baixamos a imagem para nossa maquina
+
+Usamos binwalk -e Hot_babe.png
+
+E danos strings 36.zlib
+
+E encontramos o user do ftp: ftpuser
+
+E tambem encontramos varias possiveis senhas
+
+Salvamos as possiveis senhas em um arquivo .txt
+
+Agora usaremos o Hydra para dar bruteforce 
+
+hydra -l ftpuser -P wordlist.txt ftp://"ip"
+
+Senha: 5iez1wGXKfPKQ
+
+Baixamos o unico arquivo para nossa maquina e usamos o brainfuck para interpreta-lo
+
+E temos um login e senha do SSH: eli:DSpDiM1wAEwid
+
+Logo quando entramos temos uma dica: s3cr3t
+
+Procuramos por isso na maquina find / -name "s3cr3t"
+
+E encontramos o diretorio /usr/games/s3cr3t
+
+No unico arquivo da pasta temos o outro login/senha: gwendoline:MniVCQVhQHUNI
+
+Usamos sudo -u#-1 /usr/bin/vi /home/gwendoline/user.txt
+
+E digitamos :!whoami para vermos se deu certo
+
+Depois digitamos :!/bin/bash
+
+E se tornamos root
