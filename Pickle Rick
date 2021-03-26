@@ -1,0 +1,33 @@
+Ao olhar o codigo fonte achamos um nome de usuario: R1ckRul3s
+
+Depois de procurar por diretorios encontramos o diretorio: robots.txt 
+
+Que contem uma palavra: Wubbalubbadubdub
+
+Agora tentamos logar na pagina que foi encontrada /login.php
+
+Depois de logarmos no site vemos um painel que executa comandos
+
+Tentamos executar o comando "ls"
+
+E encontramos "Sup3rS3cretPickl3Ingred.txt"
+
+Ao tentar usar "cat Sup3rS3cretPickl3Ingred.txt" recebemos uma mensagem falando que o comando foi desabilitado
+
+Então usamos "less Sup3rS3cretPickl3Ingred.txt" e temos nossa primeira resposta
+
+Depois de procurar arquivos pela maquina achamos "second ingredients" no caminho /home/rick
+
+less /home/rick/second\ ingredients
+
+Agora temos que tentar pegar root da maquina
+
+Executamos "sudo -l"
+
+Temos permissão para tudo
+
+Usamos "sudo ls /root" para ver se nossa flag está lá
+
+E encontramos "3rd.txt"
+
+Usamos "sudo less /root/3rd.txt"
