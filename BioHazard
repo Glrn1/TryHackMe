@@ -1,0 +1,67 @@
+Ao entrar no site encontramos um link "mansion"
+
+Ao entrar no link olhamos o codigo fonte e achamos outro diretorio: /diningRoom/
+
+E encontramos um emblema: emblem{fec832623ea498e20bf4fe1821d58727}
+
+Ao voltar na pagina colocamos o emblema e nada acontece
+
+Ao olhar o codigo fonte encontramos uma hash: "SG93IGFib3V0IHRoZSAvdGVhUm9vbS8="
+
+Ela nos leva para:/teaRoom/
+
+Na pagina temos duas informação uma é o "Lockpick" e outra nos leva para outro diretorio "/artRoom/"
+
+A pagina /artRoom/ nos da uma lista de todos os diretorios 
+
+Olhando todos os diretorios a /barRoom/ pede a lockpick
+
+Ao entrar encontramos uma dica para poder prosseguir: "NV2XG2LDL5ZWQZLFOR5TGNRSMQ3TEZDFMFTDMNLGGVRGIYZWGNSGCZLDMU3GCMLGGY3TMZL5"
+
+
+Ao procurar no google vamos que uma hash base32, ao decodificar temos: "music_sheet{362d72deaf65f5bdc63daece6a1f676e}"
+
+E com isso pegamos nosso emblema de ouro: "gold_emblem{58a8c41a9d08b8a4e38d02a4d7ff4843}"
+
+Usar o emblema de ouro não deu certo, mas ao usar o primeiro emblema funcionou. E nos retornou uma palavra: "rebecca"
+
+Voltamos agora para a "diningRoom" e usamos nosso emblema de ouro e obtemos:"klfvg ks r wimgnd biz mpuiui ulg fiemok tqod. Xii jvmc tbkg ks tempgf tyi_hvgct_jljinf_kvc"
+
+Isso é um tipo de criptografia chamada "VIGENERE" onde só pode decodificar quando se tem uma "key" no nosso caso temos "rebecca"
+
+Ao decripitar temos um novo diretorio: "the_great_shield_key"
+
+Ao entrar na pagina encontramos nossa shield key:"shield_key{48a7a9227cd7eb89f0a062590798cbac}"
+
+Usamos essa key para entrar na pagina "armorRoom" e pegamos nossa 3 pista: "MDAxMTAxMTAgMDAxMTAwMTEgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTAwMTEgMDAxMDAwMDAgMDAxMTAxMDAgMDExMDAxMDAgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTAxMTAgMDAxMDAwMDAgMDAxMTAxMDAgMDAxMTEwMDEgMDAxMDAwMDAgMDAxMTAxMDAgMDAxMTEwMDAgMDAxMDAwMDAgMDAxMTAxMTAgMDExMDAwMTEgMDAxMDAwMDAgMDAxMTAxMTEgMDAxMTAxMTAgMDAxMDAwMDAgMDAxMTAxMTAgMDAxMTAxMDAgMDAxMDAwMDAgMDAxMTAxMDEgMDAxMTAxMTAgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTEwMDEgMDAxMDAwMDAgMDAxMTAxMTAgMDExMDAwMDEgMDAxMDAwMDAgMDAxMTAxMDEgMDAxMTEwMDEgMDAxMDAwMDAgMDAxMTAxMDEgMDAxMTAxMTEgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTAxMDEgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTAwMDAgMDAxMDAwMDAgMDAxMTAxMDEgMDAxMTEwMDAgMDAxMDAwMDAgMDAxMTAwMTEgMDAxMTAwMTAgMDAxMDAwMDAgMDAxMTAxMTAgMDAxMTEwMDA="
+
+Usamos a mesma key para entrar na "attic" e encontramos nossa 4 pista: "gSUERauVpvKzRpyPpuYz66JDmRTbJubaoArM6CAQsnVwte6zF9J4GGYyun3k5qM9ma4s"
+
+
+Agora temos que voltar um pouco para "/diningRoom2F/" e ao olhar o codigo fonte encontramos um comentario: "Lbh trg gur oyhr trz ol chfuvat gur fgnghf gb gur ybjre sybbe. Gur trz vf ba gur qvavatEbbz svefg sybbe. Ivfvg fnccuver.ugzy "
+
+Este codigo pode ser decodificado usando ROT13 e temos uma nova pagina: "sapphire.html"
+
+E obtemos nossa blue gem: "blue_jewel{e1d457e96cac640f863ec7bc475d48aa}"
+
+Usamos ela na pagina "tigerStatusRoom" e pegamos nossa primeira pista:"S0pXRkVVS0pKQkxIVVdTWUpFM0VTUlk9"
+
+A nossa segunda pista pode ser encontrada na "galleryRoom" e a pista é "GVFWK5KHK5WTGTCILE4DKY3DNN4GQQRTM5AVCTKE"
+
+No final de todas as pista diz para juntar uma com a outra
+
+Pista 1
+Decodificar base 64, base 32 e novamente base 64 e temos: RlRQIHVzZXI6IG
+
+Pista 2
+Decodificar base 32 e base 58 e temos: h1bnRlciwgRlRQIHBh
+
+Pista 3
+Decodificar base 64, binario e hex e temos: c3M6IHlvdV9jYW50X2h
+
+Pista 4
+Decodificar base 58 e hex e temos: pZGVfZm9yZXZlcg==
+
+Agora juntamos as pistas 1, 2, 3 e 4 e temos: FTP user: hunter, FTP pass: you_cant_hide_forever
+
+Ao logar no ftp pegamos todos os arquivos que tem dentro
