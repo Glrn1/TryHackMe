@@ -65,3 +65,41 @@ Decodificar base 58 e hex e temos: pZGVfZm9yZXZlcg==
 Agora juntamos as pistas 1, 2, 3 e 4 e temos: FTP user: hunter, FTP pass: you_cant_hide_forever
 
 Ao logar no ftp pegamos todos os arquivos que tem dentro
+
+Damos o comando binwalk -e na key 003 e temos um novo arquivo "key-003.txt" e dentro dele temos "3aXRoX3Zqb2x0"
+
+E ao olhar a imagem 002 temos um comentario:"5fYmVfZGVzdHJveV9"
+
+E ao olhar a imagem 001 temos outra parte de key:"cGxhbnQ0Ml9jYW"
+
+E se olharmos o arquivo "importatnt.txt" encontramos outro diretorio escondido
+
+Na pagina ele pede a helmet_key e nos temos um arquivo com esse nome
+
+Ao juntar as 3 keys temos uma hash, ela pode ser decodificada usando base64 -d e temos nossa senha do arquivo
+
+Ao decripitar o arquivo a nossa helmet_key ira aparecer
+
+Entrando no site temos 2 links um deles nos da "wpbwbxr wpkzg pltwnhro, txrks_xfqsxrd_bvv_fy_rvmexa_ajk"
+
+Para nosso login devemos voltar para a pagina Studyroom e usar a helmet_key e la encontraremos um arquivo cripitografado
+
+Para abrir esse arquivo criptografado usamos tar -xvzf "nome do arquivo" e assim temos nossa eagle_medal.txt que é o nosso login no ssh: umbrella_guest
+
+E o outro diretorio na closedroom é a nossa do ssh:"T_virus_rules"
+
+Ao logar temos uma pasta escondida "jailcell" e dentro dela tem um txt
+
+Esse arquivo nos da uma palavra "albert" que pode ser usada para decodificar o conteudo da pagina "hidden_closed"
+
+Agora nos temos o login e senha do weasker: weasker:stars_members_are_my_guinea_pig
+
+Nossa flag de user está na nota do weasker
+
+Agora temos que pegar root
+
+sudo -l e temos permissão para tudo
+
+Então sudo cat /root/root.txt
+
+E temos nossa flag
