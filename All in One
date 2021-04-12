@@ -1,0 +1,60 @@
+Depois do nosso scan com o nmap encontramos o servidor ftp aberto
+
+Ao entrar encontramos nada
+
+Ao procurar por diretorios encontramos 1: "wordpress"
+
+Fazemos outra busca por diretorios e encontramos a pagina de login de adm
+
+E tambem encontramos um usuario: elyana
+
+Ao olharmos os plugins encontrados no scan procuramos por algum exploit
+
+Depois de uma busca rapida no google pelo mail-masta encontramos um file inclusion
+
+wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/etc/passwd
+
+Ao colocar isso em nosso navegador podemos ver o arquivo passwd da maquina
+
+Ao olhar vimos que a maquina tem um mysql rodando
+
+Agora podemos explorar essa vulnerabilidade
+
+Colocando esse link no navegador /wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=php://filter/convert.base64-encode/resource=../../../../../wp-config.php
+
+Ele vai nos passar o arquivo wp-config.php em base 64
+
+Depois é só converter normalmente em nossa maquina e temos a senha elyana
+
+elyana:H@ckme@123
+
+Agora é hora de uparmos uma reverse shell 
+
+Vamos em editor de themas e vamos em Twenty Twenty: 404 Template (404.php)
+
+Lá upamos nossa reverse shell
+
+Agora para acessarmos ela vamos em wp-content/themes/twentytwenty/404.php
+
+Abrimos a porta especificadas e temos uma shell
+
+Apos uma longa procura pela senha da elyana encontramos ela na pasta /etc/mysql/confi.g/private.txt
+
+user: elyana
+password: E@syR18ght
+
+Agora podemos logar via ssh
+
+E pegamos nossa primeira flag
+
+Agora damos sudo-l
+
+(ALL) NOPASSWD: /usr/bin/socat
+
+Procuramos por socat no gtfobins 
+
+E encontramos um comando "sudo"
+
+Usamos:sudo /usr/bin/socat stdin exec:/bin/sh
+
+E somos root
