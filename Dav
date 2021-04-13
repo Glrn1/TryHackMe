@@ -1,0 +1,19 @@
+Apos a busca por diretorios encontramos:/webdav
+
+As credenciais padrão pode ser encontrdas aqui: http://xforeveryman.blogspot.com/2012/01/helper-webdav-xampp-173-default.html
+
+Apos olhar o conteudo da pagina ela nos retorna isso: wampp:$apr1$Wm2VTkFL$PVNRQv7kzqXQIHe14qKA91
+
+É a mesma senha que usamos para entrar na pagina
+
+Agora usamos o comando cadavar "ip/webdav" e usamos as credenciais que já temos e colocamos um arquivo .php que sera nossa reverse shell
+
+Salvamos nosso arquivo .php e fazemos a conexao com o cadaver
+
+Depois usamos o comando put "arquivo.php"
+
+Abrimos a porta e acessamos pelo navegador e temos nossa shell
+
+Temos permissão para ler o arquivo user.txt mesmo sendo www-data
+
+E temos permissão de executar arquivos como sudo
