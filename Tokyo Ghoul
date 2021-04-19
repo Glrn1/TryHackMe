@@ -1,0 +1,49 @@
+Ao acessar o site temos um link para uma nova pagina: jasonroom.html
+
+Ao acessa-lá e olharmos o codigo fonte temos o login do ftp: Anonymous
+
+Fazemos o login e pegamos todos os arquivos que tem lá "get "nome do arquivo""
+
+Voltamos para os arquivos do ftp e temos um chamado "need_to_talk" 
+
+Usamos o comando strings need_to_talk encontramos uma key "kamishiro"
+
+Executamos o arquivo ./need_to_talk e colocamos a nossa key e temos uma senha: You_found_1t
+
+Agora vamos tentar extrair dados da imagem que pegamos do ftp
+
+Usamos steghide --extract -sf rize_and_kaneki.jpg e colocamos a senha que pegamos. E temos um arquivo.txt
+
+Ao olharmos o arquivo yougotme.txt vemos que está em codigo morse. Usamos o cyberchef from morse > from hex > from base64 e temos um novo diretorio: d1r3c70ry_center
+
+Ao acessar o diretorio temos uma mensagem "scan me" vamos fazer isso
+
+Encontramos um diretorio chamado "claim". Ao escolher sim ou não na URL vemos um "=" no final 
+
+Tentamos colocar ../ depois do igual e temos uma mensagem retornada: no no no silly don't do that
+
+Tentamos agora passar ../../../../../../../../etc/passwd e nos retorna a mesma mensagem
+
+Agora vamos encripitar o codigo que estamos passando na url 
+
+Usamos o site https://www.urlencoder.org/ e colocamos ../../../../../../../../etc/passwd
+
+Uma nota importante: quando usarmos o site ele ainda vai nos retorna os ".." e nao vai funcionar temos que trocar os ".." por "%2E"
+
+Assim que trocarmos colocamos na url e temos o /etc/passwd
+
+Ao olhar o user kamishiro vemos sua senha codificada
+
+Salvamos a senha em um arquivo.txt e usamos o john
+
+sudo john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
+Agora usamos as credenciais e logar na maquina e temos nossa primeira flag
+
+Agora para pegar root da maquina temos que modificar o codigo jail.py
+
+Mais detalhes de como fazer isso: https://anee.me/escaping-python-jails-849c65cf306e
+
+Agora executamos o arquivo .py e colocamos isso: __builtins__.__dict__['__IMPORT__'.lower()]('OS'.lower()).__dict__['SYSTEM'.lower()]('cat /root/root.txt')
+
+E teremos nossa flag de root
