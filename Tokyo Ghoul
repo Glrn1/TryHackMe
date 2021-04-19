@@ -36,7 +36,7 @@ Ao olhar o user kamishiro vemos sua senha codificada
 
 Salvamos a senha em um arquivo.txt e usamos o john
 
-sudo john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+sudo john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt e temos nossa senha: password123
 
 Agora usamos as credenciais e logar na maquina e temos nossa primeira flag
 
